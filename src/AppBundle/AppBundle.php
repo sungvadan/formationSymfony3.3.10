@@ -2,9 +2,10 @@
 
 namespace AppBundle;
 
+use AppBundle\Compiler\GamePass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use AppBundle\Compiler;
+
 
 class AppBundle extends Bundle
 {
@@ -12,7 +13,8 @@ class AppBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new Compiler\GamePass());
+
+        $container->addCompilerPass(new GamePass());
     }
 
 }

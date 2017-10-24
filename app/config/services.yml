@@ -16,3 +16,10 @@ services:
     AppBundle\:
         resource: '../../src/AppBundle/*'
         exclude: '../../src/AppBundle/{Entity,Repository}'
+
+    AppBundle\DataCollector\GameDataCollector:
+        arguments: ['@game.context']
+        tags:
+            -   name: data_collector
+                template: 'collectors/game.html.twig'
+                id:  'game'

@@ -25,7 +25,6 @@ class GameController extends Controller
      */
     public function playAction()
     {
-//        $gameRunnerGenerator = $this->get('game_runner_generator');
         $game = $this->createGameRunner(true)->loadGame();
 
         return $this->render('game/board.html.twig', [

@@ -4,28 +4,27 @@ services:
 
     game.loader.txt:
         class: AppBundle\Game\Loader\TextFileLoader
+        tags:
+            -   name: 'game.loader'
+                type: 'txt'
 
     game.loader.xml:
         class: AppBundle\Game\Loader\XmlFileLoader
+        tags:
+            -   name: 'game.loader'
+                type: 'xml'
 
     game.word_list:
         class: AppBundle\Game\WordList
-        calls:
-            - ['addLoader', ['txt','@game.loader.txt']]
-            - ['addLoader', ['xml','@game.loader.xml']]
-            - ['addWord', ['customer']]
-            - ['addWord', ['lemonade']]
-            - ['addWord', ['employee']]
-            - ['loadDictionaries', ['%dictionaries%']]
+        public: true
 
     game.context:
         class: AppBundle\Game\GameContext
-        arguments: ['@session', '@game.word_list']
+        arguments: ['@session']
 
     game.runner:
         class: AppBundle\Game\GameRunner
-        arguments: ['@game.context']
-        public: true
+        arguments: ['@game.context', '@game.word_list']
 
     hangman:
         alias: 'game.runner'

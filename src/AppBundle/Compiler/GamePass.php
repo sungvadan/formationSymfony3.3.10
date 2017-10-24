@@ -6,11 +6,12 @@
  * Time: 17:06
  */
 
-namespace AppBundle\Compliler;
+namespace AppBundle\Compiler;
 
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 class GamePass implements CompilerPassInterface
 {
@@ -22,6 +23,22 @@ class GamePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        // TODO: Implement process() method.
+        if(!$container->hasDefinition('game.word_list')){
+            return;
+        }
+
+        $wordList = $container->findDefinition('game.word_list');
+
+        // Delete the configuration
+        $wordList->setMethodCalls([]);
+
+        $wordList->addMethodCall('addWord',['shaker']);
+
+        $loaders = $container->findTaggedServiceIds('game.loader');
+        foreach ($loaders as $id => $parameters){
+            $wordList->addMethodCall('addLoader',[$parameters[0]['type'], new Reference($id)]);
+        }
+
+        $wordList->addMethodCall('loadDictionaries',['%dictionaries%']);
     }
 }
