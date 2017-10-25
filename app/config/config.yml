@@ -13,7 +13,7 @@ parameters:
         - "%kernel.root_dir%/Resources/data/words.xml"
 
 framework:
-    #esi:             ~
+    esi:             ~
     translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:

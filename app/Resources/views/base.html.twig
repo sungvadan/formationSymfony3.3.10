@@ -40,8 +40,8 @@
                     {% block body %}{% endblock %}
                 </div>
                 <div id="sidebar">
-                    {{ render(controller('AppBundle:Sidebar:listLastGames')) }}
-                    {{ render(controller('AppBundle:Sidebar:listLastUsers')) }}
+                    {{ render_esi(controller('AppBundle:Sidebar:listLastGames')) }}
+                    {{ render_esi(controller('AppBundle:Sidebar:listLastUsers')) }}
                 </div>
                 <br class="clearfix" />
             </div>

@@ -1,5 +1,6 @@
 <h3>{{ 'sidebar.last_players'|trans }}</h3>
 <ul>
+        <li>{{ "now"|date("m/d/Y H:i:s") }}</li>
     {% for character in users %}
         <li>{{ character.username }}</li>
     {% endfor %}
